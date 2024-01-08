@@ -29,6 +29,18 @@ venv=$inst_dir/env
 if [ ! -d $venv ]; then
 	hide_output virtualenv -ppython3 $venv
 fi
+if [ ! -d $venv/bin ]; then
+	ln -s $venv/local/bin $venv/
+fi
+if [ -d $venv/lib ]; then
+	rm -rf $venv/lib
+fi
+if [ ! -d $venv/lib ]; then
+	ln -s $venv/local/lib $venv/
+fi
+
+# Use the new virtualenv
+source $venv/bin/activate
 
 # Upgrade pip because the Ubuntu-packaged version is out of date.
 hide_output $venv/bin/pip install --upgrade pip
@@ -43,6 +55,7 @@ hide_output $venv/bin/pip install --upgrade \
 	"idna>=2.0.0" "cryptography==37.0.2" psutil postfix-mta-sts-resolver \
 	b2sdk boto3
 
+deactivate
 # CONFIGURATION
 
 # Create a backup directory and a random key for encrypting backups.

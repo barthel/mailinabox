@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 # This is the entry point for configuring the system.
 #####################################################
 
