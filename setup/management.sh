@@ -35,15 +35,6 @@ if [ ! -d $venv ]; then
 	export DEB_PYTHON_INSTALL_LAYOUT='deb'
 	hide_output virtualenv -ppython3 $venv
 fi
-if [ ! -d $venv/bin ]; then
-	ln -s $venv/local/bin $venv/
-fi
-if [ -d $venv/lib ]; then
-	rm -rf $venv/lib
-fi
-if [ ! -d $venv/lib ]; then
-	ln -s $venv/local/lib $venv/
-fi
 
 # Upgrade pip because the Ubuntu-packaged version is out of date.
 hide_output $venv/bin/pip install --upgrade pip
